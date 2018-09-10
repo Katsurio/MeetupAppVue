@@ -11,10 +11,11 @@
     <v-layout row wrap class="mt-4">
       <v-flex xs12>
         <template>
-          <v-carousel>
+          <v-carousel style="cursor:pointer">
             <v-carousel-item
               v-for='(meetup,i) in meetups'
               :key='meetup.id'
+              @click="onLoadMeetup(meetup.id)"
               :src='meetup.imageUrl'
               reverse-transition='fade'
               transition='fade'>
@@ -44,6 +45,11 @@
           {imageUrl: 'https://lonelyplanetwp.imgix.net/2016/04/Santorini-53c9e0dca77b.jpg?fit=min&q=40&sharp=10&vib=20&w=1470', id: 'NinpoSantoryu34', title: 'Meetup in Santorini'},
           {imageUrl: 'https://www.myholidayguru.co.uk/wp-content/uploads/2017/10/Zuiderkerk-in-Amsterdam-iStock-528503566-2_titel.jpg', id: 'GomuGomuNoGrizly45', title: 'Meetup in Amsterdam'}
         ]
+      }
+    },
+    methods: {
+      onLoadMeetup (id) {
+        this.$router.push('/meetups/' + id)
       }
     }
   }
