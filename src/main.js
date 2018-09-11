@@ -4,6 +4,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
+import DateFilter from './filters/date'
 
 // Helpers
 import colors from 'vuetify/es5/util/colors'
@@ -19,9 +20,9 @@ Vue.use(Vuetify, {
     warning: colors.amber.darken2
   }
 })
-
 Vue.config.productionTip = false
 
+Vue.filter('date', DateFilter)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -65,13 +65,11 @@
           <v-layout row class="mb-2">
             <v-flex xs12 sm6 offset-sm3>
               <v-date-picker v-model="date" color="green lighten-1" header-color="primary"></v-date-picker>
-              <p>{{ date }}</p>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-time-picker v-model="time" color="green lighten-1" header-color="primary"></v-time-picker>
-              <p>{{ time }}</p>
+              <v-time-picker v-model="time" format="24hr" color="green lighten-1" header-color="primary"></v-time-picker>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -81,7 +79,6 @@
                 :disabled="!formIsValid"
                 type="submit">Create Meetup
               </v-btn>
-              {{ submittableDateTime }}
             </v-flex>
           </v-layout>
         </form>
@@ -126,7 +123,6 @@
           date.setHours(this.time.getHours())
           date.setMinutes(this.time.getMinutes())
         }
-        console.log(date)
         return date
       }
     },
@@ -140,7 +136,7 @@
           location: this.location,
           imageUrl: this.imageUrl,
           description: this.description,
-          date: new Date()
+          date: this.submittableDateTime
         }
         this.$store.dispatch('createMeetup', meetupData)
         this.$router.push('/meetups')
