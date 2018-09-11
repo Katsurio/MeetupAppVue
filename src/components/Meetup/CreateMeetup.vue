@@ -79,7 +79,9 @@
               <v-btn
                 class="primary"
                 :disabled="!formIsValid"
-                type="submit">Create Meetup</v-btn>
+                type="submit">Create Meetup
+              </v-btn>
+              {{ submittableDateTime }}
             </v-flex>
           </v-layout>
         </form>
@@ -89,6 +91,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   export default {
     data () {
       return {
@@ -96,9 +99,14 @@
         location: '',
         imageUrl: '',
         description: '',
-        date: new Date().toISOString(),
+        date: new Date(),
         time: new Date()
       }
+    },
+    created () {
+      const dateTime = moment()
+      this.date = dateTime.format('YYYY-MM-DD').toString()
+      this.time = dateTime.format('HH:mm').toString()
     },
     computed: {
       formIsValid () {
@@ -106,6 +114,20 @@
           this.location !== '' &&
           this.imageUrl !== '' &&
           this.description !== ''
+      },
+      submittableDateTime () {
+        const date = new Date(this.date)
+        if (typeof this.time === 'string') {
+          const hours = this.time.match(/^(\d+)/)[1]
+          const minutes = this.time.match(/:(\d+)/)[1]
+          date.setHours(hours)
+          date.setMinutes(minutes)
+        } else {
+          date.setHours(this.time.getHours())
+          date.setMinutes(this.time.getMinutes())
+        }
+        console.log(date)
+        return date
       }
     },
     methods: {
