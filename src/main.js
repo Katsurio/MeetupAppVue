@@ -35,11 +35,17 @@ new Vue({
   render: h => h(App),
   created () {
     firebase.initializeApp({
-      apiKey: 'AIzaSyBUhZDp6RpytChReB_tCw19VhD1_uJpZ18',
-      authDomain: 'yt-devmeetup-vue-648b3.firebaseapp.com',
-      databaseURL: 'https://yt-devmeetup-vue-648b3.firebaseio.com',
-      projectId: 'yt-devmeetup-vue-648b3',
-      storageBucket: 'yt-devmeetup-vue-648b3.appspot.com'
+      apiKey: 'AIzaSyDtlgtQ11Fc-xoxO8y4ofR17bmxliOTaj8',
+      authDomain: 'devmeetup-819ed.firebaseapp.com',
+      databaseURL: 'https://devmeetup-819ed.firebaseio.com',
+      projectId: 'devmeetup-819ed',
+      storageBucket: 'devmeetup-819ed.appspot.com'
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadMeetups')
   }
 })
