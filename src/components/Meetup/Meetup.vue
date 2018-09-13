@@ -23,12 +23,19 @@
           </v-card-title>
           <v-responsive>
             <v-img
-              :src="meetup.imageUrl"
-              height="400px">
+              :src="meetup.imageUrl" height="400px">
             </v-img>
           </v-responsive>
           <v-card-text>
             <div class="info--text">{{ meetup.date | date  }} - {{ meetup.location }}</div>
+            <div>
+              <app-edit-meetup-date-dialog
+                :meetup="meetup" v-if="userIsCreator">
+              </app-edit-meetup-date-dialog>
+              <app-edit-meetup-time-dialog
+                :meetup="meetup" v-if="userIsCreator">
+              </app-edit-meetup-time-dialog>
+            </div>
             <div>{{ meetup.description }}</div>
           </v-card-text>
           <v-card-actions>
